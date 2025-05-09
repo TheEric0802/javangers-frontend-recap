@@ -1,5 +1,6 @@
 import TodoContainer from "./TodoContainer.tsx";
 import "./TodoPage.css"
+import TodoCard from "./TodoCard.tsx";
 
 export default function TodoPage() {
     return (
@@ -7,7 +8,7 @@ export default function TodoPage() {
             <button>+ Add task</button>
             <div className={"lists"}>
                 <TodoContainer heading={"OPEN"}>
-                    <p>test child</p>
+                    <TodoCard todo={{id: "1", description: "test", status: "OPEN"}} />
                 </TodoContainer>
                 <TodoContainer heading={"IN PROGRESS"}>
                     <p>test child</p>
