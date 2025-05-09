@@ -5,6 +5,7 @@ import {useCallback, useEffect, useState} from "react";
 import type {Todo} from "./types/Todo.ts";
 import axios from "axios";
 import {Route, Routes} from "react-router-dom";
+import CreateTodoPage from "./CreateTodoPage.tsx";
 
 function App() {
     const [Todos, setTodos] = useState<Todo[]>([])
@@ -37,6 +38,14 @@ function App() {
             .catch(e => console.error(e))
     }
 
+    function createTodo(todo: Todo) {
+        axios.post<Todo>("/api/todo", todo)
+            .then(() => {
+                getTodos()
+            })
+            .catch(e => console.error(e))
+    }
+
     return (
         <>
             <Header />
@@ -44,7 +53,7 @@ function App() {
                 <Route path={"/"} element={
                     <TodoPage todos={Todos} updateTodoCallback={updateTodo} deleteTodoCallback={deleteTodo}/>
                 } />
-                <Route path={"/createTodo"} element={<></>} />
+                <Route path={"/createTodo"} element={<CreateTodoPage createTodoCallback={createTodo} />} />
             </Routes>
 
         </>
