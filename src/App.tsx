@@ -20,12 +20,20 @@ function App() {
         }, [getTodos]
     )
 
-  return (
-    <>
-        <Header />
-        <TodoPage todos={Todos}/>
-    </>
-  )
+    function updateTodo(todo: Todo) {
+        axios.put<Todo>(`/api/todo/${todo.id}`, todo)
+            .then(() => {
+                getTodos()
+            })
+            .catch(e => console.error(e))
+    }
+
+    return (
+        <>
+            <Header />
+            <TodoPage todos={Todos} updateTodoCallback={updateTodo}/>
+        </>
+    )
 }
 
 export default App
