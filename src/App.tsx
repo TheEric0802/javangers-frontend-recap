@@ -28,10 +28,18 @@ function App() {
             .catch(e => console.error(e))
     }
 
+    function deleteTodo(todoId: string) {
+        axios.delete<Todo>(`/api/todo/${todoId}`)
+            .then(() => {
+                getTodos()
+            })
+            .catch(e => console.error(e))
+    }
+
     return (
         <>
             <Header />
-            <TodoPage todos={Todos} updateTodoCallback={updateTodo}/>
+            <TodoPage todos={Todos} updateTodoCallback={updateTodo} deleteTodoCallback={deleteTodo}/>
         </>
     )
 }
