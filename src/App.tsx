@@ -4,6 +4,7 @@ import TodoPage from "./TodoPage.tsx";
 import {useCallback, useEffect, useState} from "react";
 import type {Todo} from "./types/Todo.ts";
 import axios from "axios";
+import {Route, Routes} from "react-router-dom";
 
 function App() {
     const [Todos, setTodos] = useState<Todo[]>([])
@@ -39,7 +40,13 @@ function App() {
     return (
         <>
             <Header />
-            <TodoPage todos={Todos} updateTodoCallback={updateTodo} deleteTodoCallback={deleteTodo}/>
+            <Routes>
+                <Route path={"/"} element={
+                    <TodoPage todos={Todos} updateTodoCallback={updateTodo} deleteTodoCallback={deleteTodo}/>
+                } />
+                <Route path={"/createTodo"} element={<></>} />
+            </Routes>
+
         </>
     )
 }

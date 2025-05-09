@@ -2,6 +2,7 @@ import TodoContainer from "./TodoContainer.tsx";
 import "./TodoPage.css"
 import TodoCard from "./TodoCard.tsx";
 import type {Todo} from "./types/Todo.ts";
+import {useNavigate} from "react-router-dom";
 
 type TodoPageProps = {
     todos: Todo[]
@@ -10,6 +11,8 @@ type TodoPageProps = {
 }
 
 export default function TodoPage(props: TodoPageProps) {
+
+    const nav = useNavigate()
 
     const openTodoCards = props.todos.filter((todo) => todo.status === "OPEN").map((todo) => (
         <TodoCard key={todo.id} todo={todo} advanceButtonText={"Start now"} advanceButtonCallback={
@@ -38,7 +41,7 @@ export default function TodoPage(props: TodoPageProps) {
 
     return (
         <>
-            <button>+ Add task</button>
+            <button onClick={() => nav("/createTodo")}>+ Add task</button>
             <div className={"lists"}>
                 <TodoContainer heading={"OPEN"}>
                     {openTodoCards}
