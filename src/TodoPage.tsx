@@ -6,6 +6,7 @@ import type {Todo} from "./types/Todo.ts";
 type TodoPageProps = {
     todos: Todo[]
     updateTodoCallback: (todo: Todo) => void
+    deleteTodoCallback: (todoId: string) => void
 }
 
 export default function TodoPage(props: TodoPageProps) {
@@ -28,7 +29,10 @@ export default function TodoPage(props: TodoPageProps) {
     ))
     const doneTodoCards = props.todos.filter((todo) => todo.status === "DONE").map((todo) => (
         <TodoCard key={todo.id} todo={todo} advanceButtonText={"Delete"} advanceButtonCallback={
-            () => console.log("Delete")
+            () => {
+                console.log("Delete")
+                props.deleteTodoCallback(todo.id)
+            }
         } />
     ))
 
