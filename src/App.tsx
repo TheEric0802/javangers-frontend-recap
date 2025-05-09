@@ -6,9 +6,10 @@ import type {Todo} from "./types/Todo.ts";
 import axios from "axios";
 import {Route, Routes} from "react-router-dom";
 import CreateTodoPage from "./CreateTodoPage.tsx";
+import EditTodoPage from "./EditTodoPage.tsx";
 
 function App() {
-    const [Todos, setTodos] = useState<Todo[]>([])
+    const [todos, setTodos] = useState<Todo[]>([])
 
     const getTodos = useCallback(() => {
         axios.get<Todo[]>("/api/todo")
@@ -51,9 +52,10 @@ function App() {
             <Header />
             <Routes>
                 <Route path={"/"} element={
-                    <TodoPage todos={Todos} updateTodoCallback={updateTodo} deleteTodoCallback={deleteTodo}/>
+                    <TodoPage todos={todos} updateTodoCallback={updateTodo} deleteTodoCallback={deleteTodo}/>
                 } />
                 <Route path={"/createTodo"} element={<CreateTodoPage createTodoCallback={createTodo} />} />
+                <Route path={"/editTodo/:id"} element={<EditTodoPage todos={todos} updateTodoCallback={updateTodo} deleteTodoCallback={deleteTodo}/>} />
             </Routes>
 
         </>

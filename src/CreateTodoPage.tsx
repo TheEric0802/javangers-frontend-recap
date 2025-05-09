@@ -23,7 +23,7 @@ export default function CreateTodoPage(props: CreateTodoPageProps) {
     return (
         <>
             <form onSubmit={onSubmitHandler}>
-                <input name={"description"}/>
+                <input name={"description"} className={"createDescriptionInput"}/>
                 <button>Create</button>
                 <button type={"button"} onClick={() => nav("/")}>Cancel</button>
             </form>
